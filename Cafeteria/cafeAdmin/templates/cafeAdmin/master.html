@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CAFETERIA</title>
+    <meta name="description" content="Free Bootstrap Theme by uicookies.com">
+    <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,500,700">
+    <link rel="stylesheet" href="{% static 'cafeAdmin/css/styles-merged.css' %}">
+    <link rel="stylesheet" href="{% static 'cafeAdmin/css/style.min.css' %}">
+
+    <!--[if lt IE 9]>
+      <script src="{% static 'cafeAdmin/js/vendor/html5shiv.min.js' %}"></script>
+      <script src="{% static 'cafeAdmin/js/vendor/respond.min.js' %}"></script>
+    <![endif]-->
+  </head>
+  <body>
+    
+    <!-- Fixed navbar -->
+    <!-- navbar-fixed-top  -->
+    
+    
+    <nav class="navbar probootstrap-megamenu navbar-default probootstrap-navbar">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="" title="OFFICE CAFETERIA">CAFETERIA</a>
+        </div>
+
+        <div id="navbar-collapse" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="http://127.0.0.1:8000/cafeAdmin/">Home</a></li>
+
+            <li class="dropdown">
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle">Store</a>
+              <ul class="dropdown-menu">
+                <li><a href="http://127.0.0.1:8000/cafeAdmin/addItems/">Add Items</a></li>
+                <li><a href="http://127.0.0.1:8000/cafeAdmin/changeRate/">Rate Change</a></li>
+                <!--
+                <li class="dropdown-submenu dropdown">
+                  <a href="#" data-toggle="dropdown" class="dropdown-toggle"><span>Sub Menu</span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Second Level Menu</a></li>
+                    <li><a href="#">Second Level Menu</a></li>
+                    <li><a href="#">Second Level Menu</a></li>
+                    <li><a href="#">Second Level Menu</a></li>
+                  </ul>
+                </li>
+                -->
+              </ul>
+            </li>
+            <li><a href="http://127.0.0.1:8000/cafeAdmin/orders/">Orders</a></li>
+            <li class="dropdown">
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle">Report</a>
+              <ul class="dropdown-menu">
+                <li><a href="http://127.0.0.1:8000/cafeAdmin/rate/">Food Items</a></li>
+              </ul>
+            </li>
+            <li><a href="http://127.0.0.1:8000/home">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    
+
+    <section class="probootstrap-hero">
+      <div class="container">
+          <br>{% block form %}
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 text-center probootstrap-hero-text pb0 probootstrap-animate" data-animate-effect="fadeIn">
+
+              <h1>OFFICE CAFETERIA</h1>
+              <p>A Platform for Cafeteria Foods Ordering</p>
+              <p>
+                <a href="#" class="btn btn-primary btn-lg" role="button" style="background-color:red">CAFE ADMIN</a>
+
+          </div>
+        </div>
+
+            {% endblock %}
+
+                    {% if messages %}
+						{% for message in messages %}
+                          <script>alert('{{ message }}');</script>
+						{% endfor %}
+					{% endif %}
+      </div>
+    </section>
+<br>
+<!--
+    <section class="probootstrap-cta">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="probootstrap-animate" data-animate-effect="fadeInRight">We'd like to help and talk with you</h2>
+            <a href="#" role="button" class="btn btn-primary btn-lg btn-ghost probootstrap-animate" data-animate-effect="fadeInLeft">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    -->
+    <script src="{% static 'cafeAdmin/js/scripts.min.js' %}"></script>
+    <script src="{% static 'cafeAdmin/js/custom.min.js' %}"></script>
+  </body>
+</html>

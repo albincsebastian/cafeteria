@@ -1,0 +1,333 @@
+{% extends 'employee/master.html' %}{% load static %}{% block form %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+    <!-- Title Page-->
+    <title>CAFETERIA FOOD RATE</title>
+
+    <!-- Icons font CSS-->
+    <link href="{% static 'home/reg/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'home/reg/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'home/reg/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'home/reg/vendor/datepicker/daterangepicker.css' %}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{% static 'home/reg/css/main.css' %}" rel="stylesheet" media="all">
+</head>
+
+<body>
+    <div class="page-wrapper bg-red p-t-100 p-b-100 font-robo">
+        <div class="wrapper wrapper--w960">
+            <div class="card card-2">
+                <div class="card-heading"></div>
+                <div class="card-body">
+                    <h2 class="title">FOOD Rate</h2>
+                    <form method="POST" name="form1" id="form1" >
+                        {% csrf_token %}
+
+                        <div class="input-group" style="width:100%;">
+
+
+                                    <table style="width:100%;" align="center">
+                                        <tr align="left" style="background-color:blue;color:white">
+                                            <th style="padding:10px">Item</th>
+                                            <th style="padding:10px">Rate</th>
+                                        </tr>
+                                        {% for i in obj %}
+                                            <tr align="left" style="background-color:lightblue;color:brown">
+                                                <td style="padding:10px"><b>{{ i.item }}</b></td>
+                                                <td style="padding:10px"><b>{{ i.price }}</b></td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'home/reg/vendor/jquery/jquery.min.js' %}"></script>
+    <!-- Vendor JS-->
+    <script src="{% static 'home/reg/vendor/select2/select2.min.js' %}"></script>
+    <script src="{% static 'home/reg/vendor/datepicker/moment.min.js' %}"></script>
+    <script src="{% static 'home/reg/vendor/datepicker/daterangepicker.js' %}"></script>
+
+    <!-- Main JS-->
+    <script src="{% static 'home/reg/js/global.js' %}"></script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->
+<script type='text/javascript'>
+
+            $('#email').blur(function (e) {
+                if (IsEmail('email')) {
+                    $('#spnemailStatus').html('Valid Email');
+                    $('#spnemailStatus').css('color', 'green');
+                } else {
+                    $('#spnemailStatus').html('Invalid Email');
+                    $('#spnemailStatus').css('color', 'red');
+
+                }
+            });
+
+            $('#fname').blur(function (e) {
+
+                if (validateName('fname')) {
+                    $('#spnfnameStatus').html('Valid First Name');
+                    $('#spnfnameStatus').css('color', 'green');
+                } else {
+                    $('#spnfnameStatus').html('Invalid First Name');
+                    $('#spnfnameStatus').css('color', 'red');
+
+                }
+            });
+
+            $('#mname').blur(function (e) {
+
+                if ($('#mname').val()) {
+                    if (validateName('mname')) {
+                        $('#spnmnameStatus').html('Valid Middle Name');
+                        $('#spnmnameStatus').css('color', 'green');
+                    } else {
+                        $('#spnmnameStatus').html('Invalid Middle Name');
+                        $('#spnmnameStatus').css('color', 'red');
+
+                    }
+                }
+                else {
+                    $('#spnmnameStatus').html('');
+
+                }
+
+            });
+
+            $('#mobno').blur(function (e) {
+                if (validatePhone('mobno')) {
+                    $('#spnmobnoStatus').html('Valid Mobile Number');
+                    $('#spnmobnoStatus').css('color', 'green');
+                } else {
+                    $('#spnmobnoStatus').html('Invalid Mobile Number');
+                    $('#spnmobnoStatus').css('color', 'red');
+
+                }
+            });
+
+             $('#lname').blur(function (e) {
+
+                if (validateName('lname')) {
+                    $('#spnlnameStatus').html('Valid Last Name');
+                    $('#spnlnameStatus').css('color', 'green');
+                } else {
+                    $('#spnlnameStatus').html('Invalid Last Name');
+                    $('#spnlnameStatus').css('color', 'red');
+
+                }
+            });
+
+            $('#empid').blur(function (e) {
+
+                if (validateEmpid('empid')) {
+                    $('#spnempidStatus').html('Valid Employee ID');
+                    $('#spnempidStatus').css('color', 'green');
+                } else {
+                    $('#spnempidStatus').html('Invalid Employee ID');
+                    $('#spnempidStatus').css('color', 'red');
+
+                }
+            });
+
+            $('#idCard').blur(function (e) {
+
+                if ($('#idCard').val() !='') {
+                    $('#spnidCardStatus').html('');
+                    $('#spnidCardStatus').css('color', 'green');
+                } else {
+                    $('#spnidCardStatus').html('ID Card Photo required');
+                    $('#spnidCardStatus').css('color', 'red');
+
+                }
+            });
+
+            $('#formSubmit').click(function(e) {
+                 if($('#email').val() ==''){
+                    $('#spnemailStatus').html('Empty Email');
+                    $('#spnemailStatus').css('color', 'red');
+                    return false;
+                }
+
+                if($('#empid').val() ==''){
+                    $('#spnempidStatus').html('Employee ID Empty');
+                    $('#spnempidStatus').css('color', 'red');
+                    return false;
+                }
+
+                if($('#idCard').val() ==''){
+                    $('#spnidCardStatus').html('ID Card Photo required');
+                    $('#spnidCardStatus').css('color', 'red');
+                    return false;
+                }
+
+
+                if (IsEmail('email') == false) {
+                    $('#spnemailStatus').html('Invalid Email');
+                    $('#spnemailStatus').css('color', 'red');
+                    return false;
+                }
+
+                if ($('#pwd1').val() != $('#pwd2').val()){
+                    $('#spnpwdStatus').html('Passwords are not Equal');
+                    $('#spnpwdStatus').css('color', 'red');
+                    return false;
+                }
+                else{
+                $('#spnpwdStatus').html('');
+                }
+
+                e.preventDefault();
+                flag = 1;
+                $.ajax({
+                    url: 'validate_registration/',
+                    data: {
+
+                        'email': $('#email').val(),
+                        'empid': $('#empid').val(),
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.email_status) {
+                            $('#spnemailStatus').html('Email exists');
+                            $('#spnemailStatus').css('color', 'red');
+                            flag = 0;
+                        }
+                        if (data.empid_status) {
+                            $('#spnempidStatus').html('Employee ID exists');
+                            $('#spnempidStatus').css('color', 'red');
+                            flag = 0;
+                        }
+                        if(flag==1)
+                            $('#form1').submit();
+                    }
+                });
+
+
+                if (IsEmail('email') == false) {
+                    $('#spnemailStatus').html('Invalid Email');
+                    $('#spnemailStatus').css('color', 'red');
+                    var flag = 0;
+                }
+
+                if (validateName('fname')) {
+                    //
+                } else {
+                    $('#spnfnameStatus').html('Invalid  First Name');
+                    $('#spnfnameStatus').css('color', 'red');
+                    var flag = 0;
+
+                }
+                if ($('#mname').val()) {
+                    if (validateName('mname')) {
+                        //
+                    } else {
+                        $('#spnmnameStatus').html('Invalid Middle Name');
+                        $('#spnmnameStatus').css('color', 'red');
+                        var flag = 0;
+
+                    }
+                }
+
+                if (validatePhone('mobno')) {
+                    //
+                } else {
+                    $('#spnPhoneStatus').html('Invalid Mobile Number');
+                    $('#spnPhoneStatus').css('color', 'red');
+                    var flag = 0;
+
+                }
+
+
+
+                if (validateName('lname')) {
+                    //
+                } else {
+                    $('#spnlnameStatus').html('Invalid Last Name');
+                    $('#spnlnameStatus').css('color', 'red');
+                    var flag = 0;
+
+                }
+
+                if (validateEmpid('empid')) {
+                    //
+                } else {
+                    $('#spnlnameStatus').html('Invalid Employee ID');
+                    $('#spnlnameStatus').css('color', 'red');
+                    var flag = 0;
+
+                }
+
+                if (flag == 0) {
+                    return false;
+                }
+
+            });
+
+
+        function IsEmail(email) {
+            var a = document.getElementById(email).value;
+            var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if (!regex.test(a)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        function validateName(name) {
+            var a = document.getElementById(name).value;
+            var filter = /^[a-zA-Z]+$/;
+            if (filter.test(a)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function validatePhone(txtPhone) {
+            var a = document.getElementById(txtPhone).value;
+            var filter = /[1-9]{1}[0-9]{9}/;
+            if (filter.test(a)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function validateEmpid(name) {
+            var a = document.getElementById(name).value;
+            var filter = /^[a-zA-Z0-9\-_]{0,10}$/;
+            if (filter.test(a)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+</script>
+
+{% endblock %}

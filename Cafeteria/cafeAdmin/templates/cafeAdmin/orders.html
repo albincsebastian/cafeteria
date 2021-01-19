@@ -1,0 +1,170 @@
+{% extends 'cafeAdmin/master.html' %}{% load static %}{% block form %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+    <!-- Title Page-->
+    <title>CAFETERIA ORDERS</title>
+
+    <!-- Icons font CSS-->
+    <link href="{% static 'cafeAdmin/reg/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'cafeAdmin/reg/vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'cafeAdmin/reg/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'cafeAdmin/reg/vendor/datepicker/daterangepicker.css' %}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{% static 'cafeAdmin/reg/css/main.css' %}" rel="stylesheet" media="all">
+</head>
+
+<body>
+    <div class="page-wrapper bg-red p-t-100 p-b-100 font-robo">
+        <div class="wrapper wrapper--w960">
+            <div class="card card-2">
+                <div class="card-heading"></div>
+                <div class="card-body">
+                    <h2 class="title">ORDER Info</h2>
+                    <form method="POST" name="form1" id="form1">
+                        {% csrf_token %}
+
+                        {% if book %}
+
+                        <div class="input-group" style="width:100%">
+                            <div class="rs-select2 js-select-simple select--no-search" >
+                                <select name="regno" id="regno" required >
+                                    <option value="" selected="selected">Choose Reg. No.</option>
+                                    {% for i in book %}
+                                        <option value="{{ i.regno.regno }}">{{ i.regno.regno }} ({{ i.regno.fname }} {{ i.regno.mname }} {{ i.regno.lname }})</option>
+                                    {% endfor %}
+                                </select>
+                                <div class="select-dropdown"></div>
+                            </div>
+                        </div>
+
+                        <div class="p-t-30">
+                            <button class="btn btn--radius btn--green" type="submit" id="details" name="details">GET INFO</button>
+                        </div>
+
+                        {% else %}
+
+
+                        <div class="input-group" style="width:100%;">
+
+                                    <table style="width:100%;" align="center">
+
+                                        {% for i in obj %}
+
+                                        <tr align="left" style="background-color:;color:blue">
+                                            <th style="padding:10px">Reg. No</th>
+                                            <td style="padding:10px"><b>{{ i.regno.regno }}</b></td>
+                                        </tr>
+
+                                        <tr align="left" style="background-color:;color:blue">
+                                            <th style="padding:10px">Name</th>
+                                            <td style="padding:10px"><b>{{ i.regno.fname }} {{ i.regno.mname }} {{ i.regno.lname }}</b></td>
+                                        </tr>
+
+                                        <tr align="left" style="background-color:;color:blue">
+                                            <th style="padding:10px">Mobile No.</th>
+                                            <td style="padding:10px"><b>{{ i.regno.mobno }}</b></td>
+                                        </tr>
+
+                                        <tr align="left" style="background-color:;color:blue">
+                                            <th style="padding:10px">Booking Date</th>
+                                            <td style="padding:10px"><b>{{ i.bookDate }}</b></td>
+                                        </tr>
+
+                                        <input type="text" value="{{ i.bookId }}" name="bookNo" hidden>
+
+                                        {% if i.pickTime %}
+                                            <tr align="left" style="background-color:lightgreen;color:red">
+                                            <th style="padding:10px"><b>Pick TIme<b></b></th>
+                                            <td style="padding:10px"><b>{{ i.pickTime }}</b></td>
+                                        </tr>
+                                        {% endif %}
+
+                                        {% endfor %}
+                                        <tr>
+                                            <td colspan="2"><hr></td>
+                                        </tr>
+
+
+                                        <tr align="left" style="background-color:gold;color:brown">
+                                            <th colspan="2" style="padding:10px"><u><h4 style="color:brown"><b>Details of Cart</b></h4></u></th>
+                                        </tr>
+                                        {% for i in cart %}
+
+                                        {% if i.bookid == bookid %}
+                                        <tr align="left" style="background-color:gold;color:black">
+                                            <th style="padding:10px">{{ i.itemid.item }}</th>
+                                            <td style="padding:10px"><b>{{ i.count }}</b></td>
+                                        </tr>
+                                        {% endif %}
+
+                                        {% endfor %}
+
+                                        <tr>
+                                            <td colspan="2"><hr></td>
+                                        </tr>
+                                        {% for i in bill %}
+
+                                        <tr align="left" style="background-color:gold;color:black">
+                                            <th style="padding:10px">Payment Mode</th>
+                                            <td style="padding:10px"><b>{{ i.payment }}</b></td>
+                                        </tr>
+
+                                        <tr align="left" style="background-color:gold;color:black">
+                                            <th style="padding:10px">Total Amount</th>
+                                            <td style="padding:10px"><h3><b>{{ i.amt }}</b></h3></td>
+                                        </tr>
+
+
+                                        {% endfor %}
+
+                                    </table>
+                        </div>
+
+
+                        <div class="p-t-30">
+                            <button class="btn btn--radius btn--green"  id="formSubmit" name="formSubmit" value="0">COMPLETED</button>
+
+                            <button class="btn btn--radius btn--green"  value="1" id="cancel" name="cancel" style="background-color:red">CANCEL ORDER</button>
+                        </div>
+
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'cafeAdmin/reg/vendor/jquery/jquery.min.js' %}"></script>
+    <!-- Vendor JS-->
+    <script src="{% static 'cafeAdmin/reg/vendor/select2/select2.min.js' %}"></script>
+    <script src="{% static 'cafeAdmin/reg/vendor/datepicker/moment.min.js' %}"></script>
+    <script src="{% static 'cafeAdmin/reg/vendor/datepicker/daterangepicker.js' %}"></script>
+
+    <!-- Main JS-->
+    <script src="{% static 'cafeAdmin/reg/js/global.js' %}"></script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->
+<script type='text/javascript'>
+
+</script>
+
+{% endblock %}
